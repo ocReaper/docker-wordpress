@@ -1,4 +1,5 @@
 FROM centurylink/apache-php:latest
+
 MAINTAINER CenturyLink
 
 # Install packages
@@ -7,11 +8,11 @@ RUN apt-get update && \
  DEBIAN_FRONTEND=noninteractive apt-get -y install supervisor pwgen && \
  apt-get -y install mysql-client
 
-# Download Wordpress into /app
+# Download the latest Wordpress into /app
 RUN rm -fr /app && mkdir /app && \
- curl -L -O http://wordpress.org/wordpress-4.0.tar.gz && \
- tar -xzvf wordpress-4.0.tar.gz -C /app --strip-components=1 && \
- rm wordpress-4.0.tar.gz
+ curl -L -O http://wordpress.org/latest.tar.gz && \
+ tar -xzvf latest.tar.gz -C /app --strip-components=1 && \
+ rm latest.tar.gz
 
 # Add wp-config with info for Wordpress to connect to DB
 ADD wp-config.php /app/wp-config.php
